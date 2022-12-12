@@ -23,9 +23,21 @@ def findGreatest(data):
             greatest = elf
     return greatest
 
+def findGreatestThree(data):
+        data.sort(reverse = True)
+        return data[:3]
+
+def simpleSum(data):
+    sum = 0
+    for item in data:
+        sum += int(item)
+    return sum
+
 fileObject = open("InputFiles/Day1.txt", "r")
 dataLines = fileObject.read().splitlines()
 dataPerElf = splitByElf(dataLines)
 elfSums = sumEachElf(dataPerElf)
 greatestElf = findGreatest(elfSums)
-print(greatestElf)
+greatestThreeElves = findGreatestThree(elfSums)
+topThreeElfSum = simpleSum(greatestThreeElves)
+print(topThreeElfSum)

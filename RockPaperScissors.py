@@ -18,10 +18,10 @@ def pickMyInput(data):
         output.append(game)
     return output
 
-
-fileObject = open("InputFiles/Day2.txt", "r")
-dataLines = fileObject.read().splitlines()
-inputs = linesToInputs(dataLines)
-newInputs = pickMyInput(inputs)
-points = pointsWon(newInputs)
-print(points)
+if __name__ == '__main__':
+    fileObject = open("InputFiles/Day2.txt", "r")
+    dataLines = fileObject.read().splitlines()
+    inputs = linesToInputs(dataLines)
+    newInputs = pickMyInput(inputs)
+    points = pointsWon(newInputs)
+    print(points)

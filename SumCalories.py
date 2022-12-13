@@ -33,11 +33,12 @@ def simpleSum(data):
         sum += int(item)
     return sum
 
-fileObject = open("InputFiles/Day1.txt", "r")
-dataLines = fileObject.read().splitlines()
-dataPerElf = splitByElf(dataLines)
-elfSums = sumEachElf(dataPerElf)
-greatestElf = findGreatest(elfSums)
-greatestThreeElves = findGreatestThree(elfSums)
-topThreeElfSum = simpleSum(greatestThreeElves)
-print(topThreeElfSum)
+if __name__ == '__main__':
+    fileObject = open("InputFiles/Day1.txt", "r")
+    dataLines = fileObject.read().splitlines()
+    dataPerElf = splitByElf(dataLines)
+    elfSums = sumEachElf(dataPerElf)
+    greatestElf = findGreatest(elfSums)
+    greatestThreeElves = findGreatestThree(elfSums)
+    topThreeElfSum = simpleSum(greatestThreeElves)
+    print(topThreeElfSum)

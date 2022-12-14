@@ -30,8 +30,8 @@ def priorityCalc(items):
         totalPriority += priorityLookUp[tuple(item)[0]]
     return totalPriority
 
-def groupInThrees(elves):
-    output = [elves[i:i +3] for i in range(0, len(elves), 3)]
+def groupUp(elves, n):
+    output = [elves[i:i+n] for i in range(0, len(elves), n)]
     return output
 
 def findCommonItem(groups):
@@ -47,7 +47,7 @@ if __name__ == '__main__':
     misplacedItems = repeatItems(compartments)
     totalPriority = priorityCalc(misplacedItems)
 
-    groups = groupInThrees(dataLines)
+    groups = groupUp(dataLines, 3)
     badges = findCommonItem(groups)
     badgePriority = priorityCalc(badges)
     print(badgePriority)

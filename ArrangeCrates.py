@@ -53,9 +53,10 @@ def moveMultipleCrates(positionData, move):
     endColumn = int(move[5]) - 1
     positionData[endColumn].extend(positionData[startColumn][-numCrates:])
     del positionData[startColumn][-numCrates:]
-    # for line in positionData:
-    #     print(line)
 
+###############################################################################
+#Main Execution
+###############################################################################
 if __name__ == '__main__':
     fileObject = open("InputFiles/Day5.txt", "r")
     dataLines = fileObject.read().splitlines()
@@ -64,6 +65,5 @@ if __name__ == '__main__':
     moves = parsingMoves(dataLines)
     for move in moves:
         moveMultipleCrates(columns, move)
-    #moveMultipleCrates(columns, moves[0])
     for line in columns:
         print(line)

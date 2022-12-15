@@ -1,5 +1,8 @@
 from collections import Counter as ctr
 
+###############################################################################
+#Part One: n = 4         Part Two: n = 14
+###############################################################################
 def movingWindow(data, n):
     output = 0
     for i in range(n, len(data)):

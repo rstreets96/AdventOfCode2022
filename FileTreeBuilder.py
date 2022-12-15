@@ -28,6 +28,10 @@ class File():
     def setSize(self, fileSize):
         self.size = fileSize
 
+###############################################################################
+#Functions used to build the File Tree with the inputs
+###############################################################################
+
 def inputFormatting(data):
     output = []
     for line in data:
@@ -63,7 +67,33 @@ def addConnections(trees):
             if(copy[i].name.split(' ') == copy[j].name.split(' ')[:-1]):
                 trees[i].addChild(trees[j])
 
-    
+###############################################################################
+#Functions used to calculate the sum needed for part 1
+###############################################################################
+
+def smallTreeSum(trees, n):
+    sum = 0
+    for tree in trees:
+        if(tree.sumTotal <= n):
+            sum += tree.sumTotal
+    return sum
+
+###############################################################################
+#Function used to find the directory for part 2
+###############################################################################
+
+def smallestPossibleTree(trees, totalSpace, spaceNeeded):
+    freeSpace = totalSpace - trees[0].sumTotal
+    deleteSize = spaceNeeded - freeSpace
+    smallestTreeSize = trees[0].sumTotal
+    for tree in trees:
+        if(tree.sumTotal >= deleteSize):
+            if(tree.sumTotal < smallestTreeSize):
+                smallestTreeSize = tree.sumTotal
+    return smallestTreeSize
+
+
+
 
 if __name__ == '__main__':
     fileObject = open("InputFiles/Day7.txt", "r")
@@ -73,10 +103,7 @@ if __name__ == '__main__':
     trees = buildTreeList(dataSplit)
     addConnections(trees)
     trees[0].calcTotal()
-    sum = 0
-    for tree in trees:
-        if(tree.sumTotal <= 100000):
-            sum += tree.sumTotal
-    print(sum)
+    print(smallestPossibleTree(trees, 70000000, 30000000))
+    
    
     

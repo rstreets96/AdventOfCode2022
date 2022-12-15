@@ -1,3 +1,7 @@
+###############################################################################
+#Class used to act as a directory with child directories and files
+###############################################################################
+
 class Tree():
     def __init__(self, name):
         self.name = name

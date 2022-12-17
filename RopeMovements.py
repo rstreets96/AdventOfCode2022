@@ -7,9 +7,8 @@ class CoordPosition():
         self.y = y
 
 ###############################################################################
-#Function to handle one line of movement input
+#Function for Part 1
 ###############################################################################
-
 def doOneMoveSet(moveSet, head, tail):
     direction = 0
     up = 1
@@ -55,6 +54,59 @@ def doOneMoveSet(moveSet, head, tail):
     return(head, tail)
 
 ###############################################################################
+#Functions for Part 2
+###############################################################################
+def buildRope(length):
+    output = []
+    for i in range(length):
+        output.append(CoordPosition(0, 0))
+    return output
+
+def moveHead(move, head):
+    if(move == 'U'):
+        head.y += 1
+    elif(move == 'D'):
+        head.y -= 1
+    elif(move == 'L'):
+        head.x -= 1
+    elif(move == 'R'):
+        head.x += 1 
+
+def moveChain(leader, follower):
+    tailMoves = {-2:{-2:[-1, -1], -1:[-1, -1], 0:[-1, 0], 1:[-1, 1], 2:[-1, 1]}, 
+                -1:{-2:[-1, -1], -1:[0, 0], 0:[0, 0], 1:[0, 0], 2:[-1, 1]}, 
+                0:{-2:[0, -1], -1:[0, 0], 0:[0, 0], 1:[0, 0], 2:[0, 1]}, 
+                1:{-2:[1, -1], -1:[0, 0], 0:[0, 0], 1:[0, 0], 2:[1, 1]}, 
+                2:{-2:[1, -1], -1:[1, -1], 0:[1, 0], 1:[1, 1], 2:[1, 1]}}
+    xDiff = leader.x - follower.x
+    yDiff = leader.y - follower.y
+    follower.x += tailMoves[xDiff][yDiff][0]
+    follower.y += tailMoves[xDiff][yDiff][1]
+
+def checkNewSpot(tail):
+    tailSpot = CoordPosition(tail.x, tail.y)
+    newSpot = True
+    for tailPos in tailPosList:
+        if((tailPos.x == tailSpot.x) and (tailPos.y == tailSpot.y)):
+            newSpot = False
+    if(newSpot):
+        tailPosList.append(tailSpot)
+
+def printRope(rope):
+    for knot in rope:
+        print('{}, {}'.format(knot.x, knot.y))
+
+def setOfMoves(rope, moveSet):
+    for i in range(int(moveSet[1])):
+        # printRope(rope)
+        # print('\r')
+        moveHead(moveSet[0], rope[0])
+        for j in range(len(rope) - 1):
+            moveChain(rope[j], rope[j+1])
+        checkNewSpot(rope[-1])
+
+
+###############################################################################
 #Global Variable to hold all unique Tail coordinates
 ###############################################################################
 
@@ -71,10 +123,18 @@ if __name__ == '__main__':
 #Execution for Part 1
 ###############################################################################
 
-    headPos = CoordPosition(0, 0)
-    tailPos = CoordPosition(0, 0)
+    # headPos = CoordPosition(0, 0)
+    # tailPos = CoordPosition(0, 0)
+    # for move in moves:
+    #     headPos, tailPos = doOneMoveSet(move, headPos, tailPos)
+
+###############################################################################
+#Execution for Part 2
+###############################################################################
+
+    rope = buildRope(2)
     for move in moves:
-        headPos, tailPos = doOneMoveSet(move, headPos, tailPos)
+        setOfMoves(rope, move)
 
     print(len(tailPosList))
 

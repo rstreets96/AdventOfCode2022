@@ -100,7 +100,7 @@ def leastCommonMultipleOfDividers(monkeys):
 
 
 ###############################################################################
-#Boolean and round count to choose betwen Part 1 and Part 2
+#Variables to choose betwen Part 1 and Part 2
 ###############################################################################
 
 relief = False
